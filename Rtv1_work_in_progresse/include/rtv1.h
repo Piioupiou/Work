@@ -6,7 +6,7 @@
 /*   By: pgallois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/01 09:41:31 by pgallois          #+#    #+#             */
-/*   Updated: 2014/02/16 08:10:32 by pgallois         ###   ########.fr       */
+/*   Updated: 2014/03/25 00:59:02 by pgallois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ typedef struct		s_cam
 	t_point			*D;
 }					t_cam;
 
+typedef struct		s_color
+{
+	double	r;
+	double	g;
+	double	b;
+}					t_color;
+
 typedef struct		s_image
 {
 	int				width;
@@ -57,18 +64,20 @@ typedef struct		s_sphere
 {
 	t_point			*o;
 	double			r;
-	unsigned long	color;
+	t_color			*color;
 }					t_sphere;
 
 typedef struct		s_lum
 {
 	t_point			*L;
 	t_point			*o;
-	unsigned long	color;
+	t_color			*color;
 }					t_lum;
 
 typedef struct		s_struct
 {
+	t_color			*black;
+	t_color			*white;
 	t_lum			*lum;
 	t_cam			*cam;
 	t_sphere		*sphere;
@@ -82,6 +91,7 @@ typedef struct		s_struct
 	void			*win;
 }					t_struct;
 
+t_color			*ft_colorhexa_to_tcolor(unsigned long hcolor);
 int				send_key(int key);
 void			free_all(t_struct *e);
 double			ft_lenvect(t_point *p1);
@@ -92,7 +102,7 @@ t_point 		*ft_normevect(t_point *p);
 t_point			*ft_prodscal_point(t_point *p1, t_point *p2);
 double			ft_scalaire(t_point *p1, t_point *p2);
 void			ft_putpix_image(t_image *img, int x, int y,
-					unsigned long color);
+					t_color *color);
 t_point			*ft_factor_d_point(t_point *p, double i);
 t_point			*ft_add_d_point(t_point *p, double i);
 t_point			*ft_soustract_d_point(t_point *p, double i);
@@ -101,7 +111,7 @@ t_point			*ft_add_point(t_point *p1, t_point *p2);
 t_point			*ft_expose_point(t_point *p1, t_point *p2);
 t_point			*ft_soustract_point(t_point *p1, t_point *p2);
 t_struct		*ft_init(int fd, t_struct *e);
-unsigned long	ft_check_sphere(t_struct *e);
+t_color			*ft_check_sphere(t_struct *e);
 int				ft_raytracing(t_struct *e);
 int				ft_mlx(int fd);
 

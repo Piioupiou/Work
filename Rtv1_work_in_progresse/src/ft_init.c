@@ -6,7 +6,7 @@
 /*   By: pgallois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 07:27:11 by pgallois          #+#    #+#             */
-/*   Updated: 2014/02/16 08:14:35 by pgallois         ###   ########.fr       */
+/*   Updated: 2014/03/25 03:00:28 by pgallois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ t_image		*ft_init_image(t_image *img, void *mlx)
 	int	i;
 
 	i = 0;
-	img = (t_image *)malloc(5555555);
-	img->image = (char *)mlx_new_image(mlx, 1280, 800);
+	img = (t_image *)malloc(5555885);
+	img->image = malloc(999999);
+	img->image = (char *)mlx_new_image(mlx, 800, 600);
 	img->data = mlx_get_data_addr(img->image, &img->bits, &img->sizeline,\
 			&img->endian);
 	return (img);
@@ -80,7 +81,7 @@ t_struct	*ft_init_sphere(t_struct *e, char **tmp)
 	e->sphere->o->y = (double)ft_atoi(tmp[4]);
 	e->sphere->o->z = (double)ft_atoi(tmp[6]);
 	e->sphere->r = (double)ft_atoi(tmp[8]);
-	e->sphere->color = (unsigned long)tmp[10];
+	e->sphere->color = ft_colorhexa_to_tcolor(0xFF0101);
 	return (e);
 }
 
@@ -103,6 +104,9 @@ t_struct	*ft_init(int fd, t_struct *e)
 			e->map[2] = ft_atoi(tmp[3]);
 		}
 	}
+	e->lum->color = ft_colorhexa_to_tcolor(0xFFFFFF);
+	e->black = ft_colorhexa_to_tcolor(0x000000);
+	e->white = ft_colorhexa_to_tcolor(0xFFFFFF);
 	e->image = ft_init_image(e->image, e->mlx);
 	return (e);
 }

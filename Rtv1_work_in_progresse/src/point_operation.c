@@ -6,7 +6,7 @@
 /*   By: pgallois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/02 03:58:13 by pgallois          #+#    #+#             */
-/*   Updated: 2014/02/16 08:15:33 by pgallois         ###   ########.fr       */
+/*   Updated: 2014/03/25 01:08:25 by pgallois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ t_point	*ft_normevect(t_point *p)
 	double	len;
 	t_point	*result;
 
-	result = (t_point *)malloc(99);
+	result = (t_point *)malloc(99999);
 	len = ft_lenvect(p);
 	result->x = p->x / len;
 	result->y = p->y / len;
 	result->z = p->z / len;
-	free(p);
 	return (result);
 }
 
